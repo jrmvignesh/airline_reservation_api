@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe275.lab2.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import java.util.List;
@@ -8,12 +9,16 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Flight {
+public class Flight implements Serializable {
 
 	@Id
+	@ManyToOne(targetEntity = Reservation.class)
+	@JoinColumn(name = "orderNumber")
 	private String number; // Each flight has a unique flight number.
 	private int price;
 	private String fromDest;
@@ -49,8 +54,6 @@ public class Flight {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
-	
 
 	public String getFromDest() {
 		return fromDest;
@@ -99,7 +102,7 @@ public class Flight {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public Plane getPlane() {
 		return plane;
 	}

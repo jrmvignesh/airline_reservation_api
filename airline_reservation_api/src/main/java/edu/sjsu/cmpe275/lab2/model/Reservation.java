@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.ManyToAny;
@@ -17,6 +18,7 @@ public class Reservation {
 	private String orderNumber;
 	
 	@ManyToOne(cascade = CascadeType.ALL,optional = false, targetEntity=Passenger.class)
+	@JoinColumn(name="Pass_Id")
 	private Passenger passenger;
 	
 	private int price;
