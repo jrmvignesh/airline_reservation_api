@@ -7,20 +7,20 @@ import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Flight implements Serializable {
+public class Flight {
 
 	@Id
-	@ManyToOne(targetEntity = Reservation.class)
-	@JoinColumn(name = "orderNumber")
 	private String number; // Each flight has a unique flight number.
-	private int price;
+	private Float price;
 	private String fromDest;
 	private String toDest;
 
@@ -29,8 +29,10 @@ public class Flight implements Serializable {
 	 * 2017-03-22-19 The system only needs to supports PST. You can ignore other
 	 * time zones.
 	 */
-
-	private Date departureTime;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "reservation_number")
+	private Reservation reservation;
+	private String departureTime;
 	private Date arrivalTime;
 	private int seatsLeft;
 	private String description;
@@ -47,11 +49,11 @@ public class Flight implements Serializable {
 		this.number = number;
 	}
 
-	public int getPrice() {
+	public Float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
@@ -71,12 +73,12 @@ public class Flight implements Serializable {
 		this.toDest = toDest;
 	}
 
-	public Date getDepartureTime() {
+	public String getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(Date departureTime) {
-		this.departureTime = departureTime;
+	public void setDepartureTime(String departureTime2) {
+		this.departureTime = departureTime2;
 	}
 
 	public Date getArrivalTime() {

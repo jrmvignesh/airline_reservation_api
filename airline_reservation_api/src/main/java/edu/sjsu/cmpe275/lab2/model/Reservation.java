@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.ManyToAny;
@@ -23,7 +24,13 @@ public class Reservation {
 	
 	private int price;
 	
-	@OneToMany(mappedBy="number")
+	@OneToMany
+	@JoinTable
+	(
+			name="Reservation_Flights",
+			joinColumns={@JoinColumn(name="reservationorderNumber",referencedColumnName="orderNumber")},
+			inverseJoinColumns={@JoinColumn(name="flightnumber",referencedColumnName="number",unique=true)}
+	)
 	private List<Flight> flights;
 
 	public String getOrderNumber() {
