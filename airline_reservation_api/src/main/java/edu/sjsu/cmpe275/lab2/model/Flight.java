@@ -36,10 +36,48 @@ public class Flight {
 	private String arrivalTime;
 	private int seatsLeft;
 	private String description;
-	@Embedded
-	private Plane plane; // Embedded
+	
+	
+	
 	@OneToMany(mappedBy = "id")
 	private List<Passenger> passengers;
+	
+	private int capacity;
+	private String model;
+	private String manufacturer;
+	private int yearOfManufacture;
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public int getYearOfManufacture() {
+		return yearOfManufacture;
+	}
+
+	public void setYearOfManufacture(int yearOfManufacture) {
+		this.yearOfManufacture = yearOfManufacture;
+	}
 
 	public String getNumber() {
 		return number;
@@ -105,13 +143,7 @@ public class Flight {
 		this.description = description;
 	}
 
-	public Plane getPlane() {
-		return plane;
-	}
-
-	public void setPlane(Plane plane) {
-		this.plane = plane;
-	}
+	
 
 	public List<Passenger> getPassengers() {
 		return passengers;

@@ -6,10 +6,10 @@
  	import javax.persistence.Embeddable;
  	import javax.persistence.Id;
 
-//@Embeddable @Access(AccessType.FIELD)
+@Embeddable @Access(AccessType.FIELD)
 public class Plane {
 
-	private int capacity;
+/*	private int capacity;
 	private String model;
 	private String manufacturer;
 	private int yearOfManufacture;
@@ -46,4 +46,5 @@ public class Plane {
 		this.yearOfManufacture = yearOfManufacture;
 	}
 
-}
+*/
+	}

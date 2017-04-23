@@ -2,9 +2,10 @@ package edu.sjsu.cmpe275.lab2.service;
 
 import edu.sjsu.cmpe275.lab2.model.Flight;
 
+
 import edu.sjsu.cmpe275.lab2.model.Passenger;
 import edu.sjsu.cmpe275.lab2.repository.PassengerRepository;
-import edu.sjsu.cmpe275.lab2.repository.FlightRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,7 @@ public class PassengerService {
     @Autowired
     PassengerRepository passengerRepository;
     
-    @Autowired
-    FlightRepository flightRepository;
+
 
     public void addPassenger(Passenger passenger){
         passengerRepository.save(passenger);
@@ -33,7 +33,7 @@ public class PassengerService {
 
 	public Flight createFlight(Flight flight) {
 		// TODO Auto-generated method stub
-		return flightRepository.createFlight(flight);
+		return passengerRepository.createFlight(flight);
 	}
 
 

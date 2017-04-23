@@ -2,11 +2,13 @@ package edu.sjsu.cmpe275.lab2.repository;
 
 import java.util.List;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +19,8 @@ import edu.sjsu.cmpe275.lab2.model.Passenger;
 
 public class PassengerRepositoryImpl implements PassengerRepository{
 
-
+	@Autowired
+	UserRepository userRepository;
 
 
 	@Override
@@ -164,6 +167,20 @@ public class PassengerRepositoryImpl implements PassengerRepository{
 	public <S extends Passenger> boolean exists(Example<S> example) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+
+	@Override
+	public Flight createFlight(Flight flight) {
+		// TODO Auto-generated method stub
+		
+		System.out.println(flight.getDescription());
+		System.out.println(flight.getCapacity());
+		System.out.println("**************");
+		return userRepository.save(flight);
+		
+	
 	}
 
 }
