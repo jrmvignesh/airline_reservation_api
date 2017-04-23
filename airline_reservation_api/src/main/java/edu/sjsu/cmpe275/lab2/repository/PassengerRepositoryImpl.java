@@ -2,6 +2,11 @@ package edu.sjsu.cmpe275.lab2.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,29 +17,16 @@ import edu.sjsu.cmpe275.lab2.model.Passenger;
 
 public class PassengerRepositoryImpl implements PassengerRepository{
 
+
+
+
 	@Override
 	public List<Passenger> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Flight createFlight(Float price, String fromLocation, String toLocation, String departureTime,
-			String arrivalTime, String description, String capacity, String model, String manufacturer,
-			String yearOfManufacture) {
-		
-
-	        
-		// TODO Auto-generated method stub
-		Flight f = new Flight();
-		f.setPrice(price);
-		f.setFromDest(fromLocation);
-		f.setToDest(toLocation);
-		f.setDepartureTime(departureTime);
-		f.setDescription(description);
-		
-		return null;
-	}
+	
 
 	@Override
 	public void deleteAllInBatch() {

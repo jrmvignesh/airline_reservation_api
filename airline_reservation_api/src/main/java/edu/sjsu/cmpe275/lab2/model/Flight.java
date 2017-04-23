@@ -29,11 +29,11 @@ public class Flight {
 	 * 2017-03-22-19 The system only needs to supports PST. You can ignore other
 	 * time zones.
 	 */
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reservation_number")
 	private Reservation reservation;
 	private String departureTime;
-	private Date arrivalTime;
+	private String arrivalTime;
 	private int seatsLeft;
 	private String description;
 	@Embedded
@@ -81,11 +81,11 @@ public class Flight {
 		this.departureTime = departureTime2;
 	}
 
-	public Date getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Date arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 

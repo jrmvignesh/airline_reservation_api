@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Repository
-public interface PassengerRepository extends JpaRepository<Passenger,String>{
-    List<Passenger> findAll();
-
+public interface FlightRepository{
+    
+	Flight createFlight(Flight flight);
 }
