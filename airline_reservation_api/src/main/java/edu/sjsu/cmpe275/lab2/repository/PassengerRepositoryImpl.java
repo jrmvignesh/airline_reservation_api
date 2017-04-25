@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.lab2.repository;
 import java.util.List;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -16,12 +17,15 @@ import org.springframework.data.domain.Sort;
 
 import edu.sjsu.cmpe275.lab2.model.Flight;
 import edu.sjsu.cmpe275.lab2.model.Passenger;
+import edu.sjsu.cmpe275.lab2.model.Plane;
 
 public class PassengerRepositoryImpl implements PassengerRepository{
 
 	@Autowired
-	UserRepository userRepository;
+	FlightRepository flightRepository;
 
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
 	public List<Passenger> findAll() {
@@ -174,13 +178,16 @@ public class PassengerRepositoryImpl implements PassengerRepository{
 	@Override
 	public Flight createFlight(Flight flight) {
 		// TODO Auto-generated method stub
-		
-		System.out.println(flight.getDescription());
-		System.out.println(flight.getCapacity());
-		System.out.println("**************");
-		return userRepository.save(flight);
-		
-	
+
+		return flightRepository.save(flight);
+	}
+
+
+
+	@Override
+	public Passenger createFlight(Passenger passenger) {
+		// TODO Auto-generated method stub
+		return userRepository.save(passenger);
 	}
 
 }

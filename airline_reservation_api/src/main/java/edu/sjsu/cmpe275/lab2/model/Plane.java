@@ -9,7 +9,7 @@
 @Embeddable @Access(AccessType.FIELD)
 public class Plane {
 
-/*	private int capacity;
+	private int capacity;
 	private String model;
 	private String manufacturer;
 	private int yearOfManufacture;
@@ -46,5 +46,5 @@ public class Plane {
 		this.yearOfManufacture = yearOfManufacture;
 	}
 
-*/
+
 	}

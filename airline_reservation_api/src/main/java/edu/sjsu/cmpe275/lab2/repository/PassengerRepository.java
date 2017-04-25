@@ -20,4 +20,6 @@ public interface PassengerRepository extends JpaRepository<Passenger,String>{
 
 	Flight createFlight(Flight flight);
 
+	Passenger createFlight(Passenger passenger);
+
 }

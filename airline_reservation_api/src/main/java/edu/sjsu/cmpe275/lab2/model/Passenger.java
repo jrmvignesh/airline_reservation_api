@@ -8,12 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.GenericGenerator;
+
 
 @Entity
 public class Passenger {
 
         @Id
-        private String id;
+    	private String id;
 
         private String firstname;
 
@@ -28,6 +30,8 @@ public class Passenger {
         
         @OneToMany(mappedBy="orderNumber")
         private List<Reservation> reservations;
+        
+
 
     public String getId() {
         return id;

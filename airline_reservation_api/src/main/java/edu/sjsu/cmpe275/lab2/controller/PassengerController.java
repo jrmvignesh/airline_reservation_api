@@ -31,7 +31,7 @@ public class PassengerController {
     PassengerService passengerService;
 
 
-    @RequestMapping(value = "/passenger",method = RequestMethod.POST,consumes = "application/json")
+/*    @RequestMapping(value = "/passenger",method = RequestMethod.POST,consumes = "application/json")
     public Passenger addPassenger(@RequestBody Passenger passenger){
         passengerService.addPassenger(passenger);
         return passenger;
@@ -40,22 +40,52 @@ public class PassengerController {
     @RequestMapping(value = "/Passengers",method = RequestMethod.GET,produces = "application/json;application/xml")
     public List<Passenger> getPassengers(){
         return passengerService.getAllPassengers();
-    }
+    }*/
     
     //https://hostname/flight/flightNumber?price=120&&from=AA&to=BB&departureTime=CC&arrivalTime=DD
     //&description=EE&capacity=GG&model=HH&manufacturer=II&&yearOfManufacture=1997    
     
-    @RequestMapping(value = "/flights/flightNumber", method = RequestMethod.POST)
+    @RequestMapping(value = "/flights/flightNumber", method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity<?> createUser(@RequestBody Flight flight) {
-    	
-    	System.out.println("..................");
-    	
-    	
+    	System.out.println("In create flight method!!!!");	
     	passengerService.createFlight(flight);
- 
         HttpHeaders headers = new HttpHeaders();
-
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
+    //https://hostname/passenger?firstname=XX&lastname=YY&age=11&gender=famale&phone=123
+
+
+    @RequestMapping(value = "/passenger", method = RequestMethod.POST)
+    public ResponseEntity<?> createPassenger(
+    		@RequestParam ("id") String id,
+    		@RequestParam ("firstname") String firstname,
+    		@RequestParam ("lastname") String lastname,
+    		@RequestParam ("age") int age,
+    		@RequestParam ("gender") String gender,
+    		@RequestParam ("phone") String phone
+    		
+    		) 
+    
+    {
+    	System.out.println("In create paseenger method!!!!");
+    	
+    	System.out.println(firstname + " --> " + lastname);
+    	
+    	Passenger p = new Passenger();
+    	p.setId(id);
+    	p.setFirstname(firstname);
+    	p.setLastname(lastname);
+    	p.setAge(age);
+    	p.setGender(gender);
+    	p.setPhone(phone);
+    	
+    	passengerService.createPassenger(p);
+    	
+    	HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    		
+
     }
     
 

@@ -14,11 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Flight {
-
-	@Id
+	@Id 
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String number; // Each flight has a unique flight number.
 	private Float price;
 	private String fromDest;
@@ -39,44 +43,16 @@ public class Flight {
 	
 	
 	
-	@OneToMany(mappedBy = "id")
-	private List<Passenger> passengers;
 	
-	private int capacity;
-	private String model;
-	private String manufacturer;
-	private int yearOfManufacture;
-
-	public int getCapacity() {
-		return capacity;
+	@Embedded
+	private Plane plane;
+	
+	public Plane getPlane() {
+		return plane;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
-	public int getYearOfManufacture() {
-		return yearOfManufacture;
-	}
-
-	public void setYearOfManufacture(int yearOfManufacture) {
-		this.yearOfManufacture = yearOfManufacture;
+	public void setPlane(Plane plane) {
+		this.plane = plane;
 	}
 
 	public String getNumber() {
@@ -144,13 +120,5 @@ public class Flight {
 	}
 
 	
-
-	public List<Passenger> getPassengers() {
-		return passengers;
-	}
-
-	public void setPassengers(List<Passenger> passengers) {
-		this.passengers = passengers;
-	}
 
 }

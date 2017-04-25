@@ -36,5 +36,10 @@ public class PassengerService {
 		return passengerRepository.createFlight(flight);
 	}
 
+	public Passenger createPassenger(Passenger passenger) {
+		// TODO Auto-generated method stub
+		return passengerRepository.createFlight(passenger);
+	}
+
 
 }
