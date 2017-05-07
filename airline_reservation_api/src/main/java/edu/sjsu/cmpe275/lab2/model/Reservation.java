@@ -1,44 +1,63 @@
 package edu.sjsu.cmpe275.lab2.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
-public class Reservation {
+@Table(name="Reservation")
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "reservationNumber", scope = Reservation.class)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Reservation implements Serializable {
 	
-	@Id
-	private String orderNumber;
+	  @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      @Column(name="ReservationId")
+	private Long reservationNumber;
 	
-	@ManyToOne(cascade = CascadeType.ALL,optional = false, targetEntity=Passenger.class)
-	@JoinColumn(name="Pass_Id")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="Passenger_Id")
 	private Passenger passenger;
 	
+	@Column(name="Price",nullable = false)
 	private int price;
 	
-	@OneToMany
+	@ManyToMany
 	@JoinTable
 	(
 			name="Reservation_Flights",
-			joinColumns={@JoinColumn(name="reservationorderNumber",referencedColumnName="orderNumber")},
-			inverseJoinColumns={@JoinColumn(name="flightnumber",referencedColumnName="number",unique=true)}
+			joinColumns={@JoinColumn(name="Reservation_Id",referencedColumnName="ReservationId")},
+			inverseJoinColumns={@JoinColumn(name="Flight_Id",referencedColumnName="FlightId",unique=true)}
 	)
 	private List<Flight> flights;
 
-	public String getOrderNumber() {
-		return orderNumber;
+	public Long getReservationNumber() {
+		return reservationNumber;
 	}
 
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
+	public void setReservationNumber(Long reservationNumber) {
+		this.reservationNumber = reservationNumber;
 	}
 
 	public Passenger getPassenger() {
@@ -64,5 +83,7 @@ public class Reservation {
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
 	}
+
+	
 
 }
